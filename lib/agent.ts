@@ -30,7 +30,7 @@ You are a helpful assistant that answers questions about customer calls. Use bas
 `;
 
 const agent = new ToolLoopAgent({
-  model: ollama("gemma4:31b"),
+  model: ollama("gpt-oss:120b"),
   instructions: INSTRUCTIONS,
   tools: {
     bashTools: createBashTool(sandbox),
