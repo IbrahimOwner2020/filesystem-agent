@@ -10,9 +10,10 @@
   "dependencies": {
     "@ai-sdk/react": "^3.0.77",
     "@vercel/sandbox": "^1.4.1",
-    "ai": "^6.0.69",
+    "ai": "^7.0.130",
     "dotenv": "^17.2.3",
     "next": "16.1.6",
+    "ollama-ai-provider-v2": "^4.0.1",
     "react": "19.2.3",
     "react-dom": "19.2.3",
     "tsx": "^4.21.0",
