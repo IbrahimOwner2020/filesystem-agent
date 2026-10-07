@@ -1,9 +1,9 @@
-import { agent } from '@/lib/agent';
+import { agent } from "@/lib/agent";
 import {
   UIMessage,
   createUIMessageStream,
-  createUIMessageStreamResponse
-} from 'ai';
+  createUIMessageStreamResponse,
+} from "ai";
 
 export async function POST(request: Request) {
   const { messages }: { messages: UIMessage[] } = await request.json();
@@ -13,10 +13,10 @@ export async function POST(request: Request) {
   const prompt =
     lastMessage?.parts
       ?.filter(
-        (part): part is { type: 'text'; text: string } => part.type === 'text'
+        (part): part is { type: "text"; text: string } => part.type === "text",
       )
       .map((part) => part.text)
-      .join('\n') || '';
+      .join("\n") || "";
 
   return createUIMessageStreamResponse({
     stream: createUIMessageStream({
@@ -25,22 +25,22 @@ export async function POST(request: Request) {
           const stream = await agent.stream({ prompt });
           writer.merge(stream.toUIMessageStream());
         } catch (error) {
-          console.error('Agent error:', error);
+          console.error("Agent error:", error);
           writer.write({
-            type: 'text-start',
-            id: 'error'
+            type: "text-start",
+            id: "error",
           });
           writer.write({
-            type: 'text-delta',
-            id: 'error',
-            delta: 'An error occurred. Please try again.'
+            type: "text-delta",
+            id: "error",
+            delta: "An error occurred. Please try again.",
           });
           writer.write({
-            type: 'text-end',
-            id: 'error'
+            type: "text-end",
+            id: "error",
           });
         }
-      }
-    })
+      },
+    }),
   });
 }
